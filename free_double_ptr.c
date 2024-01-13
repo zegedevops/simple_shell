@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _double_pntr - frees malloced arrays
- * @str: array of string
+ * free_double_ptr - free malloced arrays
+ * @str: array of strings
  */
-void _double_pntr(char **str)
+void free_double_ptr(char **str)
 {
 	int i = 0;
 

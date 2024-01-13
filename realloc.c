@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * re_alloc - allocate mem then set all values to 0
- * @ptr: pointer to memory previously allocated (malloc(old_size))
+ * _realloc - allocate memory and set all values to 0
+ * @ptr: pointer to the memory previously allocated (malloc(old_size))
  * @old_size: size previously allocated
  * @new_size: new size to reallocate
  * Return: pointer to reallocated memory
  */
 
-void *re_alloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *p;
 	unsigned int i;
@@ -19,7 +19,7 @@ void *re_alloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (NULL);
 	}
 
-	if (new_size == old_size) /* return ptr if reallocating same prv size */
+	if (new_size == old_size) /* return ptr if reallocating same old size */
 		return (ptr);
 
 	if (ptr == NULL) /* malloc new size if ptr is originally null */
@@ -31,14 +31,14 @@ void *re_alloc(void *ptr, unsigned int old_size, unsigned int new_size)
 			return (p);
 	}
 
-	p = malloc(new_size); /* malloc and check for error */
+	p = malloc(new_size); /* malloc and check error */
 	if (p == NULL)
 		return (NULL);
 
 	/* fill up values up till minimum of old or new size */
 	for (i = 0; i < old_size && i < new_size; i++)
 		*((char *)p + i) = *((char *)ptr + i);
-	free(ptr); /* free old pointer */
+	free(ptr); /* free old ptr */
 
 	return (p);
 }

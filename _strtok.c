@@ -47,10 +47,10 @@ int t_size(char *str, char delm)
 }
 
 /**
- * ignore_delm - return version of string without preceeding delims
+ * ignore_delm - returns a version of string without preceeding delims
  * @str: string
- * @delm: delimiter
- * Return: new string
+ * @delm: delimiter (e.g. " ")
+ * Return: new string (e.g. "    ls -l" --> "ls -l")
  */
 char *ignore_delm(char *str, char delm)
 {
@@ -60,18 +60,18 @@ char *ignore_delm(char *str, char delm)
 }
 
 /**
- * str_toknn - tokenizes a string then return an array of tokens
- * @str: user's command typed in shell
- * @delm: delimeter
- * Return: an array of tokens
+ * _str_tok - tokenizes a string and returns an array of tokens
+ * @str: user's command typed into shell
+ * @delm: delimeter (e.g. " ");
+ * Return: an array of tokens (e.g. {"ls", "-l", "/tmp"}
  */
-char **str_toknn(char *str, char *delm)
+char **_str_tok(char *str, char *delm)
 {
 	int buffsize = 0, p = 0, si = 0, i = 0, len = 0, se = 0, t = 0;
 	char **toks = NULL, d_ch;
 
 	d_ch = delm[0];
-	/* creates new version string, ignoring delims infront*/
+	/* creates new version of string ignoring all delims infront*/
 	str = ignore_delm(str, d_ch);
 	/* malloc ptrs to store array of tokens (buffsize + 1), and NULL ptr */
 	buffsize = t_size(str, d_ch);

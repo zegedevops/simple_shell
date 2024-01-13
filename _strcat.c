@@ -1,19 +1,19 @@
 #include "shell.h"
 
 /**
- * str_caten - concatenating two strings
- * @dest: string appended to
- * @src: string appended
+ * _strcat - concatenate two strings
+ * @dest: string to be appended to
+ * @src: string to append
  * Return: concatenated string
  */
-char *str_caten(char *dest, char *src)
+char *_strcat(char *dest, char *src)
 {
 	int len = 0;
 	int len2 = 0;
 	int total_len = 0;
 	int j = 0;
 
-	/* find the total length of both strings to re_alloc */
+	/* find total length of both strings to _realloc */
 	while (dest[len] != '\0')
 	{
 		len++;
@@ -25,8 +25,8 @@ char *str_caten(char *dest, char *src)
 		total_len++;
 	}
 
-	/* re_alloc because dest was malloced outside function */
-	dest = re_alloc(dest, len, sizeof(char) * total_len + 1);
+	/* _realloc because dest was malloced outside of function */
+	dest = _realloc(dest, len, sizeof(char) * total_len + 1);
 
 	while (src[j] != '\0')
 	{

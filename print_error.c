@@ -1,23 +1,23 @@
 #include "shell.h"
 
 /**
- * nt_seen - write an error ("sh: 1: lss: not found")
- * @str: user typed command
- * @c_n: nth user typed command
- * @env: bring in environmental variables linked list to write the shell name
+ * not_found - write error ("sh: 1: lss: not found")
+ * @str: user's typed command
+ * @c_n: nth user's typed command
+ * @env: bring in environmental variables linked list to write shell name
  */
-void nt_seen(char *str, int c_n, list_t *env)
+void not_found(char *str, int c_n, list_t *env)
 {
 	int count = 0;
 	char *shell, *num;
 
-	shell = gt_enviro("_", env); /* get shell name and write */
+	shell = get_env("_", env); /* get shell name to write */
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, shell, count);
 	free(shell);
 	write(STDOUT_FILENO, ": ", 2);
-	num = intgr_into_strng(c_n); /* convert cmd line number to string and write */
+	num = int_to_string(c_n); /* convert cmd line num to string to write */
 	count = 0;
 	while (num[count] != '\0')
 		count++;
@@ -33,23 +33,23 @@ void nt_seen(char *str, int c_n, list_t *env)
 }
 
 /**
- * cnt_cdir_too - write the error ("sh: 2: cd: can't cd to xyz")
+ * cant_cd_to - write error ("sh: 2: cd: can't cd to xyz")
  * @str: user's typed argument after the cmd cd
- * @c_n: nth user typed command
+ * @c_n: nth user's typed command
  * @env: bring in environmental variables linked list to write shell name
  */
-void cnt_cdir_too(char *str, int c_n, list_t *env)
+void cant_cd_to(char *str, int c_n, list_t *env)
 {
 	int count = 0;
 	char *shell, *num;
 
-	shell = gt_enviro("_", env);
+	shell = get_env("_", env);
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, shell, count);
 	free(shell);
 	write(STDOUT_FILENO, ": ", 2);
-	num = intgr_into_strng(c_n);
+	num = int_to_string(c_n);
 	count = 0;
 	while (num[count] != '\0')
 		count++;
@@ -65,23 +65,23 @@ void cnt_cdir_too(char *str, int c_n, list_t *env)
 }
 
 /**
- * wrong_num - write error ("sh: 3: exit: Illegal number abc (or -1)")
- * @str: user typed argument after the cmd exit
- * @c_n: nth user typed command
- * @env: bring in environmental variables linked list and write shell name
+ * illegal_number - write error ("sh: 3: exit: Illegal number abc (or -1)")
+ * @str: user's typed argument after the cmd exit
+ * @c_n: nth user's typed command
+ * @env: bring in environmental variables linked list to write shell name
  */
-void wrong_num(char *str, int c_n, list_t *env)
+void illegal_number(char *str, int c_n, list_t *env)
 {
 	int count = 0;
 	char *shell = NULL, *num = NULL;
 
-	shell = gt_enviro("_", env);
+	shell = get_env("_", env);
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, shell, count);
 	free(shell);
 	write(STDOUT_FILENO, ": ", 2);
-	num = intgr_into_strng(c_n);
+	num = int_to_string(c_n);
 	count = 0;
 	while (num[count] != '\0')
 		count++;

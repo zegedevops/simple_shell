@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * main - create simple shell
+ * main - creates a simple shell
  * @ac: argument count
  * @av: argument vectors
  * @env: environmental variables
@@ -12,7 +12,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 
-	promppt(env);
+	prompt(env);
 
 	return (0);
 }

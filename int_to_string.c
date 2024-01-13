@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * numlen - counts the number of 0s in a tens power number
+ * numlen - counts number of 0s in a tens power number
  * @n: number
- * Return: returns count of numbers
+ * Return: returns count of digits
  */
-static int numlen(int n)
+int numlen(int n)
 {
 	int count = 0;
 	int num = n;
@@ -18,12 +18,12 @@ static int numlen(int n)
 	return (count);
 }
 /**
- * intgr_into_strng - turns an int into string
+ * int_to_string - turns an int into a string
  * @number: int
- * Return: returns the int as string. returns NULL if failed
+ * Return: returns the int as a string. returns NULL if failed
  */
 
-char *intgr_into_strng(int number)
+char *int_to_string(int number)
 {
 	int digits, tens, i = 0, t = 0, x;
 	char *res;

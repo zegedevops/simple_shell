@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * c_ignore - custom ignores the spaces and newlines
+ * c_ignore - custom ignores spaces and newlines
+ * (e.g. echo "ls\n ls" | ./a.out)
  * @str: envrionmental variables
  * Return: new string
  */
@@ -13,16 +14,17 @@ char *c_ignore(char *str)
 }
 
 /**
- * no_interakt - handles when user pipes commands into shell via pipeline
+ * non_interactive - handles when user pipes commands into shell via pipeline
+ * (e.g. echo "ls/nls -al/n" | ./a.out)
  * @env: envrionmental variables
  */
-void no_interakt(list_t *env)
+void non_interactive(list_t *env)
 {
 	size_t i = 0, n = 0;
 	int command_line_no = 0, exit_stat = 0;
 	char *command = NULL, *n_command = NULL, **n_line, **token;
 
-	i = gt_lin(&command);
+	i = get_line(&command);
 	if (i == 0)
 	{
 		free(command);
@@ -30,25 +32,25 @@ void no_interakt(list_t *env)
 	}
 	n_command = command;
 	command = c_ignore(command);
-	n_line = str_toknn(command, "\n"); /* tokenize each command of string */
+	n_line = _str_tok(command, "\n"); /* tokenize each command string */
 	if (n_command != NULL)
 		free(n_command);
 	n = 0;
 	while (n_line[n] != NULL)
 	{
 		command_line_no++;
-		token = NULL; /* tokenize each command in array of cmd */
-		token = str_toknn(n_line[n], " ");
-		exit_stat = builtt_into(token, env, command_line_no, n_line);
+		token = NULL; /* tokenize each command in array of commands */
+		token = _str_tok(n_line[n], " ");
+		exit_stat = built_in(token, env, command_line_no, n_line);
 		if (exit_stat)
 		{
 			n++;
 			continue;
 		}
-		exit_stat = exec_cmd(token, env, command_line_no);
+		exit_stat = _execve(token, env, command_line_no);
 		n++;
 	}
-	_double_pntr(n_line);
-	_lnkd_lst_fri(env);
+	free_double_ptr(n_line);
+	free_linked_list(env);
 	exit(exit_stat);
 }
