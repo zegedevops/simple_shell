@@ -1,1 +1,0 @@
-dubem ZEGE simple shell
